@@ -165,6 +165,8 @@ Commands: `/create-agent-skill`, `/heal-skill`, `/audit-skill`
 
 The skill-based evolution of the meta-prompting system. Builds prompts with structured outputs (research.md, plan.md) that subsequent prompts can parse. Adds automatic dependency detection to chain research → plan → implement workflows.
 
+**Note:** For end-to-end project building, consider [create-plans](#create-plans) - it's the more structured evolution of this approach with full lifecycle management (brief → roadmap → execution → handoffs). Use create-meta-prompts for abstract workflows and Claude→Claude pipelines. Use create-plans for actually building projects.
+
 Commands: `/create-meta-prompt`
 
 ### [Create Slash Commands](./skills/create-slash-commands/)
