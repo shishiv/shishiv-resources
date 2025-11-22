@@ -24,27 +24,27 @@ find . -maxdepth 2 -type f 2>/dev/null | grep -E '\.(py|js|jsx|ts|tsx|rs|swift|c
 [ -f "*.xcodeproj" ] || [ -f "Package.swift" ] && echo "DETECTED: Swift/macOS project"
 [ -f "go.mod" ] && echo "DETECTED: Go project"
 
-# Scan for available debugging expertise
-echo "DEBUG_EXPERTISE:"
-ls ~/.claude/skills/debug/ 2>/dev/null | head -5
+# Scan for available domain expertise
+echo "BUILD_SKILLS:"
+ls ~/.claude/skills/build/ 2>/dev/null | head -5
 ```
 
 **Present findings before starting investigation.**
 </context_scan>
 
 <domain_expertise>
-**Domain-specific debugging knowledge lives in `~/.claude/skills/debug/`**
+**Domain-specific expertise lives in `~/.claude/skills/build/`**
 
-Before investigation, determine if domain expertise should be loaded.
+Domain skills contain comprehensive knowledge including debugging, testing, performance, and common pitfalls. Before investigation, determine if domain expertise should be loaded.
 
 <scan_domains>
 ```bash
-ls ~/.claude/skills/debug/ 2>/dev/null
+ls ~/.claude/skills/build/ 2>/dev/null
 ```
 
-This reveals available debugging expertise (e.g., python-games, react-apps, rust-systems, macos-apps).
+This reveals available domain expertise (e.g., macos-apps, iphone-apps, python-games, unity-games).
 
-**If no debug skills found:** Proceed without domain expertise (graceful degradation). The skill works fine with general debugging methodology.
+**If no build skills found:** Proceed without domain expertise (graceful degradation). The skill works fine with general debugging methodology.
 </scan_domains>
 
 <inference_rules>
@@ -52,16 +52,18 @@ If user's description or codebase contains domain keywords, INFER the domain:
 
 | Keywords/Files | Domain Skill |
 |----------------|--------------|
-| "Python", "game", "pygame", ".py" + game loop | debug/python-games |
-| "React", "component", "hook", ".jsx/.tsx" | debug/react-apps |
-| "Rust", "cargo", ".rs" files | debug/rust-systems |
-| "Swift", "macOS", ".swift" + AppKit/SwiftUI | debug/macos-apps |
-| "iOS", "iPhone", ".swift" + UIKit | debug/iphone-apps |
-| "Unity", ".cs" + Unity imports | debug/unity-games |
+| "Python", "game", "pygame", ".py" + game loop | build/python-games |
+| "React", "Next.js", ".jsx/.tsx" | build/nextjs-ecommerce |
+| "Rust", "cargo", ".rs" files | build/rust-systems |
+| "Swift", "macOS", ".swift" + AppKit/SwiftUI | build/macos-apps |
+| "iOS", "iPhone", ".swift" + UIKit | build/iphone-apps |
+| "Unity", ".cs" + Unity imports | build/unity-games |
+| "SuperCollider", ".sc", ".scd" | build/supercollider |
+| "Agent SDK", "claude-agent" | build/with-agent-sdk |
 
 If domain inferred, confirm:
 ```
-Detected: [domain] issue → debug/[skill-name]
+Detected: [domain] issue → build/[skill-name]
 Load this debugging expertise? (Y / see other options / none)
 ```
 </inference_rules>
@@ -72,15 +74,15 @@ If no domain obvious, present options:
 ```
 What type of project are you debugging?
 
-Available debugging expertise:
-1. python-games - Python game debugging (Pygame, performance, physics)
-2. react-apps - React debugging (re-renders, hooks, state)
-3. rust-systems - Rust debugging (borrow checker, lifetimes, performance)
-4. macos-apps - macOS Swift debugging (SwiftUI, AppKit, memory)
-[... any others found in debug/]
+Available domain expertise:
+1. macos-apps - macOS Swift (SwiftUI, AppKit, debugging, testing)
+2. iphone-apps - iOS Swift (UIKit, debugging, performance)
+3. python-games - Python games (Pygame, physics, performance)
+4. unity-games - Unity (C#, debugging, optimization)
+[... any others found in build/]
 
 N. None - proceed with general debugging methodology
-C. Create debugging expertise for this domain
+C. Create domain expertise for this domain
 
 Select:
 ```
@@ -90,17 +92,18 @@ Select:
 When domain selected, READ all references from that skill:
 
 ```bash
-cat ~/.claude/skills/debug/[domain]/references/*.md 2>/dev/null
+cat ~/.claude/skills/build/[domain]/references/*.md 2>/dev/null
 ```
 
-This loads domain-specific debugging knowledge BEFORE investigation:
-- Common issues in this domain
-- Domain-specific debugging tools
-- Error patterns and their meanings
-- Performance profiling approaches
+This loads comprehensive domain knowledge BEFORE investigation:
+- Common issues and error patterns
+- Domain-specific debugging tools and techniques
+- Testing and verification approaches
+- Performance profiling and optimization
 - Known pitfalls and anti-patterns
+- Platform-specific considerations
 
-Announce: "Loaded [domain] debugging expertise. Investigating with domain-specific context."
+Announce: "Loaded [domain] expertise. Investigating with domain-specific context."
 
 **If domain skill not found:** Inform user and offer to proceed with general methodology or create the expertise.
 </load_domain>
