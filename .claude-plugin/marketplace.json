@@ -1,8 +1,8 @@
 {
-  "name": "taches-cc-resources",
+  "name": "shishiv-resources",
   "owner": {
-    "name": "Lex Christopherson",
-    "email": "lex@glittercowboy.com"
+    "name": "Myke Matos",
+    "email": "shiv@triangulotec.com.br"
   },
   "metadata": {
     "description": "Curated Claude Code skills and commands for prompt engineering and productivity",
@@ -10,7 +10,7 @@
   },
   "plugins": [
     {
-      "name": "taches-cc-resources",
+      "name": "shiv-resources",
       "source": "./",
       "description": "Skills and commands for prompt engineering, MCP servers, subagents, hooks, and productivity workflows",
       "version": "1.0.0",
